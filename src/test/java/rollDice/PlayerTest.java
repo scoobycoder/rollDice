@@ -1,11 +1,15 @@
 package rollDice;
 
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+
+import java.util.ArrayList;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import static org.mockito.Mockito.verify;
 
 public class PlayerTest {
 
@@ -14,18 +18,31 @@ public class PlayerTest {
 
 	@Mock
 	Dice dice;
+	private ArrayList<Dice> allTheDice;
 
 	@Before
 	public void setup() {
 		applicationContext = new ClassPathXmlApplicationContext("application-context.xml");
 		underTest = (Player) applicationContext.getBean("player");
 		MockitoAnnotations.initMocks(this);
+		allTheDice = new ArrayList<Dice>();
 	}
 
 	@Test
 	public void playerCanRollDice() {
-		underTest.roll(dice);
-		verify(dice).roll();
+		allTheDice.add(dice);
+		underTest.roll(allTheDice);
+
+		verify(dice, times(1)).roll();
+	}
+	
+	@Test
+	public void playerCanRollTwoDiceAtOnce() {
+		allTheDice.add(dice);
+		allTheDice.add(dice);
+		underTest.roll(allTheDice);
+		
+		verify(dice, times(2)).roll();
 	}
 
 }
