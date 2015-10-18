@@ -62,10 +62,10 @@ public class PlayerTest {
 	}
 	
 	@Test
-	public void playerWillNotAdjustScoreBelowZeroWithHighNegativeModifier() {
+	public void playerWillNotAdjustScoreBelowOneWithHighNegativeModifier() {
 		rollDiceWithModifier(1, -5);
 		
-		assertThat(underTest.calculateScore(), is(0));
+		assertThat(underTest.calculateScore(), is(1));
 	}
 
 	private void rollDiceWithModifier(int numberOfDice, int modifier) {

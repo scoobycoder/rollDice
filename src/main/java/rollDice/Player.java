@@ -14,8 +14,8 @@ public class Player {
 	}
 
 	public int calculateScore() {
-		if (isNegativeScore())
-			return 0;
+		if (isScoreBelowOne())
+			return 1;
 		
 		return rollValue += modifier;
 	}
@@ -24,8 +24,8 @@ public class Player {
 		this.modifier = modifier;
 	}
 	
-	private boolean isNegativeScore() {
-		return rollValue + modifier < 0;
+	private boolean isScoreBelowOne() {
+		return rollValue + modifier < 1;
 	}
 
 }
