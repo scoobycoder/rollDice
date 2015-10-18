@@ -49,23 +49,32 @@ public class PlayerTest {
 	
 	@Test
 	public void playerCanSumTheValueOfDiceWhenTheDiceComeUpSnakeEyes() {
-		when(dice.roll()).thenReturn(1);
-		addDiceForRolling(2);
-		underTest.roll(allTheDice);
+		rollDiceWithModifier(2, 0);
 		
 		assertThat(underTest.calculateScore(), is(2));
 	}
 	
 	@Test
 	public void playerCanAddModifierToRoll() {
-		when(dice.roll()).thenReturn(1);
-		addDiceForRolling(2);
-		underTest.roll(allTheDice);
-		underTest.addModifier(3);
+		rollDiceWithModifier(2, 3);
 		
 		assertThat(underTest.calculateScore(), is(5));
 	}
+	
+	@Test
+	public void playerWillNotAdjustScoreBelowZeroWithHighNegativeModifier() {
+		rollDiceWithModifier(1, -5);
+		
+		assertThat(underTest.calculateScore(), is(0));
+	}
 
+	private void rollDiceWithModifier(int numberOfDice, int modifier) {
+		when(dice.roll()).thenReturn(1);
+		addDiceForRolling(numberOfDice);
+		underTest.roll(allTheDice);
+		underTest.addModifier(modifier);
+	}
+	
 	private void addDiceForRolling(int numberOfDice) {
 		for(int i = 0; i < numberOfDice; i++)
 			allTheDice.add(dice);

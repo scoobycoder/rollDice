@@ -14,11 +14,18 @@ public class Player {
 	}
 
 	public int calculateScore() {
+		if (isNegativeScore())
+			return 0;
+		
 		return rollValue += modifier;
 	}
 
 	public void addModifier(int modifier) {
 		this.modifier = modifier;
+	}
+	
+	private boolean isNegativeScore() {
+		return rollValue + modifier < 0;
 	}
 
 }
