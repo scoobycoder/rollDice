@@ -2,9 +2,8 @@ package rollDice;
 
 public class Dice {
 
-	public Object roll() {
-		// TODO Auto-generated method stub
-		return null;
+	public int roll() {
+		return -1;
 	}
 
 }

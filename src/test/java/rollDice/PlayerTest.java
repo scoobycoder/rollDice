@@ -2,6 +2,9 @@ package rollDice;
 
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.util.ArrayList;
 
@@ -43,6 +46,16 @@ public class PlayerTest {
 		underTest.roll(allTheDice);
 		
 		verify(dice, times(2)).roll();
+	}
+	
+	@Test
+	public void playerCanSumTheValueOfDiceWhenTheDiceComeUpSnakeEyes() {
+		when(dice.roll()).thenReturn(1);
+		
+		allTheDice.add(dice);
+		allTheDice.add(dice);
+		
+		assertThat(underTest.roll(allTheDice), is(2));
 	}
 
 }
