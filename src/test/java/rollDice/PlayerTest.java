@@ -5,10 +5,7 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import static org.mockito.Mockito.when;
-
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.mockito.Mockito.verify;
 
 public class PlayerTest {
 
@@ -27,9 +24,8 @@ public class PlayerTest {
 
 	@Test
 	public void playerCanRollDice() {
-		when(dice.roll()).thenReturn(6);
-		
-		assertThat(underTest.roll(dice), is(6));
+		underTest.roll(dice);
+		verify(dice).roll();
 	}
 
 }
