@@ -41,8 +41,7 @@ public class PlayerTest {
 	
 	@Test
 	public void playerCanRollTwoDiceAtOnce() {
-		allTheDice.add(dice);
-		allTheDice.add(dice);
+		addDiceForRolling(2);
 		underTest.roll(allTheDice);
 		
 		verify(dice, times(2)).roll();
@@ -52,10 +51,14 @@ public class PlayerTest {
 	public void playerCanSumTheValueOfDiceWhenTheDiceComeUpSnakeEyes() {
 		when(dice.roll()).thenReturn(1);
 		
-		allTheDice.add(dice);
-		allTheDice.add(dice);
+		addDiceForRolling(2);
 		
 		assertThat(underTest.roll(allTheDice), is(2));
+	}
+
+	private void addDiceForRolling(int numberOfDice) {
+		for(int i = 0; i < numberOfDice; i++)
+			allTheDice.add(dice);
 	}
 
 }
