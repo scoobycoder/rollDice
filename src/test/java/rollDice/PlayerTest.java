@@ -50,10 +50,20 @@ public class PlayerTest {
 	@Test
 	public void playerCanSumTheValueOfDiceWhenTheDiceComeUpSnakeEyes() {
 		when(dice.roll()).thenReturn(1);
-		
 		addDiceForRolling(2);
+		underTest.roll(allTheDice);
 		
-		assertThat(underTest.roll(allTheDice), is(2));
+		assertThat(underTest.calculateScore(), is(2));
+	}
+	
+	@Test
+	public void playerCanAddModifierToRoll() {
+		when(dice.roll()).thenReturn(1);
+		addDiceForRolling(2);
+		underTest.roll(allTheDice);
+		underTest.addModifier(3);
+		
+		assertThat(underTest.calculateScore(), is(5));
 	}
 
 	private void addDiceForRolling(int numberOfDice) {

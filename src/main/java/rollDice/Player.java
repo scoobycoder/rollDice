@@ -3,13 +3,22 @@ package rollDice;
 import java.util.ArrayList;
 
 public class Player {
+	
+	private int modifier;
+	private int rollValue;
 
-	public int roll(ArrayList<Dice> allTheDice) {
-		int rollValue = 0;
+	public void roll(ArrayList<Dice> allTheDice) {
 		for(Dice dice : allTheDice) {
-			rollValue += dice.roll();
+			this.rollValue += dice.roll();
 		}
-		return rollValue;
+	}
+
+	public int calculateScore() {
+		return rollValue += modifier;
+	}
+
+	public void addModifier(int modifier) {
+		this.modifier = modifier;
 	}
 
 }
